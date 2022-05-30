@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>ged-test-platform</artifactId>
+    <name>TEST - Test création de projet Alfresco - Platform Module</name>
+    <description>TEST - Test création de projet Alfresco - Platform Module</description>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>fr.atos.modules.test.ged-test</groupId>
+        <artifactId>ged-test</artifactId>
+        <version>1.0.0.1-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>fr.atos.modules.test</groupId>
+            <artifactId>ged-parent-platform</artifactId>
+            <version>${ged-parent.version}</version>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

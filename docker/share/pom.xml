@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.atos.modules.test.ged-test.docker</groupId>
+    <artifactId>share</artifactId>
+    <name>TEST - Test création de projet Alfresco - Share Docker Module</name>
+    <description>TEST - Test création de projet Alfresco - Share Docker Module</description>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>fr.atos.modules.test.ged-test</groupId>
+        <artifactId>docker</artifactId>
+        <version>1.0.0.1-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>fr.atos.modules.test.docker</groupId>
+            <artifactId>share</artifactId>
+            <version>${ged-parent.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>fr.atos.modules.test.ged-test</groupId>
+            <artifactId>ged-test-share</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <!-- Collect extensions (JARs or AMPs) declared in this module do be deployed to docker -->
+                    <execution>
+                        <id>collect-extensions</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                            <!-- IMPORTANT: if using amp dependencies only, add <includeTypes>amp</includeTypes> -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

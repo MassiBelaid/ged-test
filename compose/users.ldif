@@ -1,0 +1,53 @@
+version: 1
+
+dn: dc=alfresco,dc=com
+objectclass: top
+objectclass: domain
+dc: alfresco
+
+dn: ou=groups,dc=alfresco,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: groups
+
+dn: ou=users,dc=alfresco,dc=com
+objectClass: organizationalUnit
+objectClass: top
+ou: users
+
+dn: uid=admin,ou=users,dc=alfresco,dc=com
+objectClass: organizationalPerson
+objectClass: person
+objectClass: inetOrgPerson
+objectClass: top
+cn: Administrator
+sn:
+givenName: Administrator
+mail: admin@atos.net
+uid: admin
+userPassword:: e1NTSEF9SlZ3OHJYQ0tqRXQwMkdnMDlzS0xqbzNvTjJJd2ViZDdUWnA5NEE9PQ==
+
+dn: uid=flast-name,ou=users,dc=alfresco,dc=com 
+objectClass: organizationalPerson 
+objectClass: person 
+objectClass: inetOrgPerson 
+objectClass: top 
+cn: FirstName Last-Name 
+sn: Last-Name 
+givenName: FirstName 
+mail: firstname.last-name@mail.atos.fr 
+uid: flast-name 
+userPassword:: e1NTSEF9SlZ3OHJYQ0tqRXQwMkdnMDlzS0xqbzNvTjJJd2ViZDdUWnA5NEE9PQ==
+
+dn: cn=GROUP_1,ou=groups,dc=alfresco,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: GROUP_1
+member: uid=flast-name,ou=users,dc=alfresco,dc=com
+
+dn: cn=GROUP_2,ou=groups,dc=alfresco,dc=com
+objectClass: groupOfNames
+objectClass: top
+cn: GROUP_2
+member: cn=GROUP_1,ou=groups,dc=alfresco,dc=com
+

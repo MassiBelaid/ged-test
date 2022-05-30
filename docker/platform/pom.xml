@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.atos.modules.test.ged-test.docker</groupId>
+    <artifactId>platform</artifactId>
+    <name>TEST - Test création de projet Alfresco - Platform Docker Module</name>
+    <description>TEST - Test création de projet Alfresco - Platform Docker Module</description>
+    <packaging>pom</packaging>
+    <parent>
+        <groupId>fr.atos.modules.test.ged-test</groupId>
+        <artifactId>docker</artifactId>
+        <version>1.0.0.1-SNAPSHOT</version>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>fr.atos.modules.test.docker</groupId>
+            <artifactId>platform</artifactId>
+            <version>${ged-parent.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>fr.atos.modules.test.ged-test</groupId>
+            <artifactId>ged-test-platform</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.atos.modules.test.ged-test</groupId>
+            <artifactId>ged-test-integration-tests</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+            <classifier>tests</classifier>
+        </dependency>
+        <!-- Add any additional AMPs or extension JARs here that you want to be deployed in Alfresco -->
+        <!-- IMPORTANT: 
+             If using amp extensions only, add <includeTypes>amp</includeTypes> to the "collect-extensions" execution below.
+             If using both amp and jar extensions, you have to add: 
+                <exclusions>
+                  <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                  </exclusion>
+                </exclusions>
+             to each amp dependency definition.
+         -->
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <!-- Copy the repository extension and the dependencies required for execute integration tests -->
+                    <execution>
+                        <id>collect-test-artifacts</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+                            <excludeScope>compile</excludeScope>
+                        </configuration>
+                    </execution>
+                    <!-- Collect extensions (JARs or AMPs) declared in this module do be deployed to docker -->
+                    <execution>
+                        <id>collect-extensions</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/extensions</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                            <!-- IMPORTANT: if using amp dependencies only, add <includeTypes>amp</includeTypes> -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
